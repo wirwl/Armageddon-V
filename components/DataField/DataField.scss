@@ -1,0 +1,16 @@
+.data-field {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  &__caption {
+    white-space: nowrap;
+  }
+  &__dots {
+    width: 100%;
+    border-bottom: 1px dotted #000;
+  }
+  &__value {
+    white-space: nowrap;
+  }
+}

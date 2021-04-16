@@ -1,0 +1,15 @@
+.data-field-list {
+  min-width: 289px;
+
+  &__item {
+    list-style: none;
+
+    &:not(:last-child) {
+      margin-bottom: 8px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    padding: 0 15px;
+  }
+}

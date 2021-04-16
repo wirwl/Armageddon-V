@@ -1,0 +1,111 @@
+.asteroid-card {
+  display: flex;
+  max-width: 920px;
+  min-height: 200px;
+  background: linear-gradient(90deg, #cff37d 0%, #7de88c 100%);
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 25px;
+  padding-left: 80px;
+  overflow: hidden;
+  position: relative;
+
+  &::before {
+    content: "";
+    width: 56px;
+    height: 48px;
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+    display: inline-block;
+    background: url(dino.svg) no-repeat 0px bottom;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 15px;
+  }
+
+  &__wrapper-asteroid {
+    position: absolute;
+    bottom: 100px;
+    right: 80%;
+    // width: 71px;
+    // height: 72px
+    //transform: translateX(50px);
+  }
+
+  &_hazardous {
+    background: linear-gradient(90deg, #ffb199 0%, #ff0844 100%);
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-left: auto;
+    flex-basis: 549px;
+  }
+
+  &__wrapper-data {
+    //flex-basis: 289px;
+    // margin-right: 10px;
+  }
+
+  &__name {
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: underline;
+    margin-bottom: 15px;
+  }
+
+  &__wrapper-action {
+    // padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__hazard {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 560px) {
+    background: #fff;
+    padding: 0 0 20px 0;
+
+    &::before {
+      background: none;
+    }
+
+    &__name {
+      background: linear-gradient(90deg, #cff37d 0%, #7de88c 100%);
+      min-height: 145px;
+      display: flex;
+      align-items: flex-end;
+      padding: 8px 16px;
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        width: 35px;
+        height: 30px;
+        bottom: 0;
+        right: 8px;
+        background: url(dino.svg) no-repeat bottom left;
+        background-size: 35px 30px;
+        transform: scaleX(-1);
+      }
+    }
+
+    &__wrapper {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    &__wrapper-data {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+}

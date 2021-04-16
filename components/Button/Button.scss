@@ -1,0 +1,12 @@
+.button {
+  padding: 15px;
+  background: #186dd6;
+  border-radius: 24px;
+  text-align: center;
+
+  &__text {
+    text-decoration: none;
+    color: white;
+    white-space: nowrap;
+  }
+}
