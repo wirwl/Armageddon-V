@@ -1,4 +1,5 @@
 import "./pages.scss";
+import "../components/Layout/Layout.scss";
 import "../components/Header/Header.scss";
 import "../components/Footer/Footer.scss";
 import "../components/SettingsPanel/SettingsPanel.scss";

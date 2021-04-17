@@ -1,0 +1,13 @@
+.index {
+  &__control {
+    list-style: none;
+
+    &:first-child {
+      margin-top: 25px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 25px;
+    }
+  }
+}

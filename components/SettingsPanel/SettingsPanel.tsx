@@ -1,16 +1,14 @@
-import * as React from "react";
 import { block } from "bem-cn";
+import Checkbox from "../Checkbox/Checkbox";
 
 const b = block("settings-panel");
 
 const SettingsPanel = () => (
   <div className={b()}>
-    <label>
-      <input type="checkbox" /> Показать только опасные
-    </label>
+    <Checkbox text={"Показать только опасные"} />
     <div>
-      <span>Расстояние в километрах,</span>
-      <span>в дистанциях до луны</span>
+      <span>Расстояние</span>
+      <span>в километрах </span>,<span>в дистанциях до луны</span>
     </div>
   </div>
 );

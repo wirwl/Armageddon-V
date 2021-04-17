@@ -1,8 +1,11 @@
 import React, { ReactNode } from "react";
 import Link from "next/link";
 import Head from "next/head";
-import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import { block } from "bem-cn";
+
+const b = block("layout");
 
 type Props = {
   children?: ReactNode;
@@ -36,7 +39,7 @@ const Layout = ({ children, title = "This is the default title" }: Props) => (
         | <a href="/api/users">Users API</a>
       </nav>
     </Header>
-    <main>{children}</main>
+    <main className={b("main-content")}>{children}</main>
     <Footer>2021 © Все права и планета защищены</Footer>
   </div>
 );

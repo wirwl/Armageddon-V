@@ -18,18 +18,17 @@ const Header = ({
 }: Props) => (
   <header className={b()}>
     <div className={b("text")}>
-      {children}
       <h1 className={b("title")}>{title}</h1>
       <p className={b("description")}>{description}</p>
     </div>
-    <div className={b("pages")}>
+    <nav className={b("page-links")}>
       <Link href="/">
         <a className={b("asteroids-page")}>Астероиды</a>
       </Link>
       <Link href="/destroy">
         <a className={b("destroy-page")}>Уничтожение</a>
       </Link>
-    </div>
+    </nav>
   </header>
 );
 
