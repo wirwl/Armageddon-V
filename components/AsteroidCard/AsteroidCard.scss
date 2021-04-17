@@ -28,7 +28,7 @@
   &__wrapper-asteroid {
     position: absolute;
     bottom: 100px;
-    right: 80%;
+    left: 122px;
     // width: 71px;
     // height: 72px
     //transform: translateX(50px);
@@ -43,6 +43,7 @@
     justify-content: space-between;
     margin-left: auto;
     flex-basis: 549px;
+    z-index: 10;
   }
 
   &__wrapper-data {
@@ -96,6 +97,12 @@
         background-size: 35px 30px;
         transform: scaleX(-1);
       }
+    }
+
+    &__wrapper-asteroid {
+      left: 27px;
+      top: 22px;
+      z-index: 50;
     }
 
     &__wrapper {

@@ -13,7 +13,7 @@ const b = block("asteroid-card");
 const AsteroidCard = () => (
   <div className={b({ hazardous: false })}>
     <div className={b("wrapper-asteroid")}>
-      <ResizableAsteroid size={85} />
+      <ResizableAsteroid />
     </div>
     <div className={b("wrapper")}>
       <div className={b("wrapper-data")}>
