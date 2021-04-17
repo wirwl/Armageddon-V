@@ -1,0 +1,26 @@
+@import ".././../variables.scss";
+
+.toggle-distance-type {
+  display: flex;
+  flex-wrap: wrap;
+
+  $r: &;
+
+  &__distance {
+    @include visually-hidden;
+  }
+
+  &__distance + #{$r}__distance-type {
+    text-decoration: underline;
+  }
+
+  &__distance:checked + #{$r}__distance-type {
+    text-decoration: none;
+    font-weight: bold;
+    cursor: auto;
+  }
+
+  &__distance-type {
+    cursor: pointer;
+  }
+}

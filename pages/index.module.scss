@@ -1,13 +1,10 @@
 .index {
-  &__control {
+  &__settings-panel,
+  &__asteroid-card-list {
     list-style: none;
+  }
 
-    &:first-child {
-      margin-top: 25px;
-    }
-
-    &:not(:last-child) {
-      margin-bottom: 25px;
-    }
+  &__settings-panel {
+    margin: 25px 0 16px 0;
   }
 }

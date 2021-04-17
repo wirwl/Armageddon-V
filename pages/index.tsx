@@ -10,10 +10,10 @@ const b = block("index");
 const IndexPage = () => (
   <Layout title="Home | Next.js + TypeScript Example">
     <ul className={s[b()]}>
-      <li className={s[b("control")]}>
+      <li className={s[b("settings-panel")]}>
         <SettingsPanel />
       </li>
-      <li className={s[b("control")]}>
+      <li className={s[b("asteroid-card-list")]}>
         <AsteroidCardList />
       </li>
     </ul>

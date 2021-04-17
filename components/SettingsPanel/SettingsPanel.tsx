@@ -1,14 +1,16 @@
 import { block } from "bem-cn";
 import Checkbox from "../Checkbox/Checkbox";
+import ToggleButton from "../ToggleDistanceType/ToggleDistanceType";
 
 const b = block("settings-panel");
 
 const SettingsPanel = () => (
   <div className={b()}>
-    <Checkbox text={"Показать только опасные"} />
-    <div>
-      <span>Расстояние</span>
-      <span>в километрах </span>,<span>в дистанциях до луны</span>
+    <div className={b("checkbox")}>
+      <Checkbox text={"Показать только опасные"} />
+    </div>
+    <div className={b("toggle-button")}>
+      <ToggleButton />
     </div>
   </div>
 );
