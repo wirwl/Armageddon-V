@@ -51,7 +51,7 @@ const AsteroidCardList = ({ userData }: Props) => {
     // console.log("we in handleScroll function that replace in AsteroidCardList");
     // To get page offset of last user
     const lastUserLoaded = document.querySelector(
-      ".asteroid-card-list > .asteroid-card-list__item:last-child"
+      `.${b()} > .${b("item")}:last-child`
     );
     // console.log(lastUserLoaded);
     if (lastUserLoaded) {
@@ -66,10 +66,14 @@ const AsteroidCardList = ({ userData }: Props) => {
           const query: ParsedUrlQuery = router.query;
           query.page = (parseInt(userData.curPage) + 1).toString();
           // console.log(query.page);
-          router.push({
-            pathname: router.pathname,
-            query: query,
-          });
+          router.push(
+            {
+              pathname: router.pathname,
+              query: query,
+            },
+            undefined,
+            { scroll: false }
+          );
         }
       }
     }
