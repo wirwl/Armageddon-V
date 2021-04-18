@@ -1,6 +1,6 @@
 import { block } from "bem-cn";
 import Checkbox from "../Checkbox/Checkbox";
-import ToggleButton from "../ToggleDistanceType/ToggleDistanceType";
+// import ToggleButton from "../ToggleDistanceType/ToggleDistanceType";
 
 const b = block("settings-panel");
 

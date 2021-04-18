@@ -6,7 +6,7 @@ import { block } from "bem-cn";
 import s from "./index.module.scss";
 import fetch from "node-fetch";
 import absoluteUrl from "next-absolute-url";
-import { NextApiRequest, NextApiResponse } from "next";
+// import { NextApiRequest, NextApiResponse } from "next";
 
 const b = block("index");
 // const fetcher = (url: any) => fetch(url).then((res) => res.json());

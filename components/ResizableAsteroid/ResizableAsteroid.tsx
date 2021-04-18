@@ -10,13 +10,13 @@ type Props = {
 };
 // 71 186 598
 // 72  189 607
-const scaleFactor = (size: integer) => {
+const scaleFactor = () => {
   return 1;
 };
 
-const s = scaleFactor(71);
+const s = scaleFactor();
 
-const ResizableAsteroid = ({ size = 71 }: Props) => (
+const ResizableAsteroid = ({}: Props) => (
   <img
     className={b()}
     src={asteroidUrl}
