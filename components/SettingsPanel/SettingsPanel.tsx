@@ -9,9 +9,7 @@ const SettingsPanel = () => (
     <div className={b("checkbox")}>
       <Checkbox text={"Показать только опасные"} />
     </div>
-    <div className={b("toggle-button")}>
-      <ToggleButton />
-    </div>
+    <div className={b("toggle-button")}>{/* <ToggleButton /> */}</div>
   </div>
 );
 

@@ -39,11 +39,21 @@ const AsteroidCardList = ({ userData }: Props) => {
     };
   }, []);
 
+  // Listen to scroll positions for loading more data on scroll
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
   const handleScroll = () => {
+    // console.log("we in handleScroll function that replace in AsteroidCardList");
     // To get page offset of last user
     const lastUserLoaded = document.querySelector(
-      ".user-list > .user:last-child"
+      ".asteroid-card-list > .asteroid-card-list__item:last-child"
     );
+    // console.log(lastUserLoaded);
     if (lastUserLoaded) {
       const lastUserLoadedOffset =
         (lastUserLoaded as HTMLElement).offsetTop + lastUserLoaded.clientHeight;
@@ -54,7 +64,8 @@ const AsteroidCardList = ({ userData }: Props) => {
         if (userData.curPage < userData.maxPage && !loading) {
           // Trigger fetch
           const query: ParsedUrlQuery = router.query;
-          query["page"] = (parseInt(userData.curPage) + 1).toString();
+          query.page = (parseInt(userData.curPage) + 1).toString();
+          // console.log(query.page);
           router.push({
             pathname: router.pathname,
             query: query,
@@ -66,9 +77,14 @@ const AsteroidCardList = ({ userData }: Props) => {
 
   return (
     <ul className={b()}>
-      <li className={b("item")}>
-        <AsteroidCard />
-      </li>
+      {users.length > 0 &&
+        users.map((user: any, i) => {
+          return (
+            <li className={b("item")} key={i}>
+              <AsteroidCard index={i} name={user.name} />
+            </li>
+          );
+        })}
     </ul>
   );
 };

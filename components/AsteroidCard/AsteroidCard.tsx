@@ -7,19 +7,20 @@ import Link from "next/link";
 
 const b = block("asteroid-card");
 
-// type Props = {
-//   text: string;
-// };
+type Props = {
+  name: string;
+  index: number;
+};
 
-const AsteroidCard = () => (
+const AsteroidCard = ({ name, index }: Props) => (
   <div className={b({ hazardous: false })}>
     <div className={b("wrapper-asteroid")}>
-      <ResizableAsteroid />
+      <ResizableAsteroid />{" "}
     </div>
     <div className={b("wrapper")}>
       <div className={b("wrapper-data")}>
         <Link href={"/asteroids/2468910"}>
-          <a className={b("name")}>2021 fq</a>
+          <a className={b("name")}>{`${index} ${name}`}</a>
         </Link>
         <DataFieldList
           items={[

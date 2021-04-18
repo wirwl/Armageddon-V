@@ -10,8 +10,8 @@ type Props = {
 
 const DataFieldList = ({ items }: Props) => (
   <ul className={b()}>
-    {items.map((item) => (
-      <li className={b("item")}>
+    {items.map((item, i) => (
+      <li className={b("item")} key={i}>
         <DataField caption={item.caption} value={item.value} />
       </li>
     ))}
