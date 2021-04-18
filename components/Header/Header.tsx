@@ -11,11 +11,7 @@ type Props = {
   description?: string;
 };
 
-const Header = ({
-  children,
-  title = "Title",
-  description = "Description",
-}: Props) => (
+const Header = ({ title = "Title", description = "Description" }: Props) => (
   <header className={b()}>
     <div className={b("text")}>
       <h1 className={b("title")}>{title}</h1>
