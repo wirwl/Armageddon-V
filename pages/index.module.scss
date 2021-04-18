@@ -5,6 +5,10 @@
   }
 
   &__settings-panel {
-    margin: 25px 0 16px 0;
+    margin: 25px 0 10px 0;
+
+    @media (max-width: 715px) {
+      margin: 10px 0 0 0;
+    }
   }
 }

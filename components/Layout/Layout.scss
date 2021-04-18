@@ -8,4 +8,10 @@
 
   &__footer {
   }
+
+  @media (max-width: 715px) {
+    &__main-content {
+      margin-bottom: 5px;
+    }
+  }
 }

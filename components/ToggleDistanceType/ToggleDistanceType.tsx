@@ -10,11 +10,11 @@ const ToggleDistanceType = () => (
         <input className={b("distance")} type="radio" name="distance" checked />
         <span className={b("distance-type")}>в километрах</span>
       </label>
-      <span>, </span>
+      <span>,&nbsp;</span>
     </div>
     <label className={b("luna")}>
       <input className={b("distance")} type="radio" name="distance" />{" "}
-      <span className={b("distance-type")}> в дистанциях до луны</span>
+      <span className={b("distance-type")}>в дистанциях до луны</span>
     </label>
   </div>
 );

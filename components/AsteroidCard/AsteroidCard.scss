@@ -22,9 +22,9 @@
     background: url(dino.svg) no-repeat 0px bottom;
   }
 
-  &:not(:last-child) {
-    margin-bottom: 15px;
-  }
+  // &:not(:last-child) {
+  //   margin-bottom: 15px;
+  // }
 
   &__wrapper-asteroid {
     position: absolute;
@@ -48,15 +48,19 @@
   }
 
   &__wrapper-data {
-    //flex-basis: 289px;
+    // flex-basis: 289px;
     // margin-right: 10px;
+    // outline: 1px dashed gray;
   }
 
   &__name {
+    display: block;
     font-weight: bold;
+    font-size: 24px;
     text-transform: uppercase;
     text-decoration: underline;
     margin-bottom: 15px;
+    color: #000;
   }
 
   &__wrapper-action {
@@ -66,12 +70,17 @@
     align-items: center;
   }
 
+  &__rating {
+    padding-top: 15px;
+    margin-bottom: 10px;
+  }
+
   &__hazard {
     font-weight: bold;
     margin-bottom: 8px;
   }
 
-  @media (max-width: 680px) {
+  @media (max-width: 715px) {
     background: #fff;
     padding: 0 0 20px 0;
 

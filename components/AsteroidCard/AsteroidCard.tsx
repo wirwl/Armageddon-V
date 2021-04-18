@@ -3,6 +3,7 @@ import { block } from "bem-cn";
 import Button from "../Button/Button";
 import DataFieldList from "../DataFieldList/DataFieldList";
 import ResizableAsteroid from "../ResizableAsteroid/ResizableAsteroid";
+import Link from "next/link";
 
 const b = block("asteroid-card");
 
@@ -17,7 +18,9 @@ const AsteroidCard = () => (
     </div>
     <div className={b("wrapper")}>
       <div className={b("wrapper-data")}>
-        <div className={b("name")}>2021 fq</div>
+        <Link href={"/asteroids/2468910"}>
+          <a className={b("name")}>2021 fq</a>
+        </Link>
         <DataFieldList
           items={[
             { caption: "Дата", value: "12 сентября 2021" },

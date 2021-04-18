@@ -22,4 +22,8 @@
   &__asteroids-page {
     margin-right: 25px;
   }
+
+  @media (max-width: 715px) {
+    padding: 8px 0 18px 0;
+  }
 }

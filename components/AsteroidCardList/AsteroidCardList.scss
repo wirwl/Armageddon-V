@@ -1,2 +1,9 @@
 .asteroid-card-list {
+  &__item {
+    list-style: none;
+  }
+
+  &__item:not(:last-child) {
+    margin-bottom: 15px;
+  }
 }

@@ -4,6 +4,7 @@ import "../components/Header/Header.scss";
 import "../components/Footer/Footer.scss";
 import "../components/SettingsPanel/SettingsPanel.scss";
 import "../components/Button/Button.scss";
+import "../components/Checkbox/Checkbox.scss";
 import "../components/DataField/DataField.scss";
 import "../components/DataFieldList/DataFieldList.scss";
 import "../components/AsteroidCardList/AsteroidCardList.scss";

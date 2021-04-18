@@ -3,6 +3,7 @@
 .toggle-distance-type {
   display: flex;
   flex-wrap: wrap;
+  user-select: none;
 
   $r: &;
 
