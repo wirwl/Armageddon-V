@@ -4,6 +4,8 @@ import { block } from "bem-cn";
 import AsteroidCard from "../AsteroidCard/AsteroidCard";
 import { ParsedUrlQuery } from "node:querystring";
 import { AsteroidData, ServerData } from "../../interfaces/asteroid";
+import { useSelector } from "react-redux";
+import { IRootState } from "../../store";
 
 const b = block("asteroid-card-list");
 
@@ -19,6 +21,19 @@ const AsteroidCardList = ({ userData }: Props) => {
   const [loading, setLoading] = useState(false);
   const startLoading = () => setLoading(true);
   const stopLoading = () => setLoading(false);
+
+  const isShowOnlyHazardous = useSelector(
+    (state: IRootState) => state.isShowOnlyHazardous
+  );
+  console.log("value from index.tsx");
+  console.log(isShowOnlyHazardous);
+
+  // if (isShowOnlyHazardous)
+  //   userData.asteroids = userData.asteroids.filter(
+  //     (value) => value.isPotentiallyHazardous === true
+  //   );
+
+  // console.log(userData.asteroids);
 
   // Set up user data
   useEffect(() => {
@@ -68,6 +83,7 @@ const AsteroidCardList = ({ userData }: Props) => {
           // Trigger fetch
           const query: ParsedUrlQuery = router.query;
           query.page = (userData.curPage + 1).toString();
+          query.hazardous = isShowOnlyHazardous ? "1" : "0";
           // console.log(query.page);
           router.push(
             {
@@ -86,7 +102,6 @@ const AsteroidCardList = ({ userData }: Props) => {
     <ul className={b()}>
       {asteroids.length > 0 &&
         asteroids.map((asteroid: AsteroidData, i) => {
-          asteroid.estimatedDiameterMax = asteroid.estimatedDiameterMax + 100;
           return (
             <li className={b("item")} key={i}>
               <AsteroidCard index={i} data={asteroid} />

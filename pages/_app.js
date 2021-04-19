@@ -1,3 +1,6 @@
+import { Provider } from "react-redux";
+import { useStore } from "../store";
+
 import "./pages.scss";
 import "../components/Layout/Layout.scss";
 import "../components/Header/Header.scss";
@@ -14,8 +17,18 @@ import "../components/ToggleDistanceType/ToggleDistanceType.scss";
 
 // import App from 'next/app'
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+// function MyApp({ Component, pageProps }) {
+//   return <Component {...pageProps} />;
+// }
+
+function App({ Component, pageProps }) {
+  const store = useStore(pageProps.initialReduxState);
+
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
+  );
 }
 
 // Only uncomment this method if you have blocking data requirements for
@@ -30,4 +43,4 @@ function MyApp({ Component, pageProps }) {
 //   return { ...appProps }
 // }
 
-export default MyApp;
+export default App;

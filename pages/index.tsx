@@ -7,6 +7,9 @@ import s from "./index.module.scss";
 import fetch from "node-fetch";
 import absoluteUrl from "next-absolute-url";
 import { AsteroidData, ServerData } from "../interfaces/asteroid";
+import { GetServerSideProps } from "next";
+import { useSelector } from "react-redux";
+import { IRootState } from "../store";
 // import { NextApiRequest, NextApiResponse } from "next";
 
 const b = block("index");
@@ -46,14 +49,19 @@ const IndexPage = ({ userData }: Props) => {
   );
 };
 
-export const getServerSideProps = async ({ req, query }: any) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  query,
+}) => {
   // Fetch the first page as default
   const page = query.page || 1;
   let userData = null;
   // Fetch data from external API
   const host = absoluteUrl(req, req.headers.host);
   try {
-    const res = await fetch(`${host.origin}/api/asteroids?page=${page}`);
+    const res = await fetch(
+      `${host.origin}/api/asteroids?page=${page}&hazardous=1`
+    );
     // const res = await fetch(`${process.env.FETCH_URL}/api/users?page=${page}`)
     if (res.status !== 200) {
       throw new Error("Failed to fetch");
