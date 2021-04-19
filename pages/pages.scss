@@ -16,3 +16,19 @@ body {
   max-width: 920px;
   margin: auto;
 }
+
+html,
+body,
+#__next,
+.layout {
+  height: 100%;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.layout__wrapper {
+  flex: 1 0 auto;
+}
