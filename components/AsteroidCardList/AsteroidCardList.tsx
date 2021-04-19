@@ -3,15 +3,18 @@ import Router, { useRouter } from "next/router";
 import { block } from "bem-cn";
 import AsteroidCard from "../AsteroidCard/AsteroidCard";
 import { ParsedUrlQuery } from "node:querystring";
+import { AsteroidData, ServerData } from "../../interfaces/asteroid";
 
 const b = block("asteroid-card-list");
 
 type Props = {
-  userData: any;
+  userData: ServerData;
+  // asteroids: AsteroidData[];
 };
 
 const AsteroidCardList = ({ userData }: Props) => {
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
+  const [asteroids, setAsteroids] = useState([]);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const startLoading = () => setLoading(true);
@@ -24,7 +27,7 @@ const AsteroidCardList = ({ userData }: Props) => {
       if (userData.error) {
         // Handle error
       } else {
-        setUsers(userData.users);
+        setAsteroids(userData.asteroids as any);
       }
     }
   }, [userData]);
@@ -64,7 +67,7 @@ const AsteroidCardList = ({ userData }: Props) => {
         if (userData.curPage < userData.maxPage && !loading) {
           // Trigger fetch
           const query: ParsedUrlQuery = router.query;
-          query.page = (parseInt(userData.curPage) + 1).toString();
+          query.page = (userData.curPage + 1).toString();
           // console.log(query.page);
           router.push(
             {
@@ -81,11 +84,12 @@ const AsteroidCardList = ({ userData }: Props) => {
 
   return (
     <ul className={b()}>
-      {users.length > 0 &&
-        users.map((user: any, i) => {
+      {asteroids.length > 0 &&
+        asteroids.map((asteroid: AsteroidData, i) => {
+          asteroid.estimatedDiameterMax = asteroid.estimatedDiameterMax + 100;
           return (
             <li className={b("item")} key={i}>
-              <AsteroidCard index={i} name={user.name} />
+              <AsteroidCard index={i} data={asteroid} />
             </li>
           );
         })}

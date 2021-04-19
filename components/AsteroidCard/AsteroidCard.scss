@@ -27,7 +27,7 @@
   // }
 
   &__wrapper-asteroid {
-    position: absolute;
+    // position: absolute;
     bottom: 100px;
     left: 13.26%;
     // width: 71px;
@@ -54,7 +54,7 @@
   }
 
   &__name {
-    display: block;
+    display: inline-block;
     font-weight: bold;
     font-size: 24px;
     text-transform: uppercase;

@@ -6,13 +6,14 @@ import { block } from "bem-cn";
 import s from "./index.module.scss";
 import fetch from "node-fetch";
 import absoluteUrl from "next-absolute-url";
+import { AsteroidData, ServerData } from "../interfaces/asteroid";
 // import { NextApiRequest, NextApiResponse } from "next";
 
 const b = block("index");
 // const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
 type Props = {
-  userData: any;
+  userData: ServerData;
 };
 
 const IndexPage = ({ userData }: Props) => {
@@ -21,10 +22,18 @@ const IndexPage = ({ userData }: Props) => {
   // if (error) return <div>Failed to load users</div>;
   // if (!props.data) return <div>Loading...</div>;
 
-  // console.log(userData);
+  console.log(userData);
+
+  // userData.asteroids.sort(function (a: AsteroidData, b: AsteroidData) {
+  //   const data1 = a.closeApproachData;
+  //   const data2 = b.closeApproachData;
+  //   if (data1 > data2) return 1;
+  //   if (data1 < data2) return -1;
+  //   return 0;
+  // });
 
   return (
-    <Layout title="Home | Next.js + TypeScript Example">
+    <Layout title="Armageddon V">
       <ul className={s[b()]}>
         <li className={s[b("settings-panel")]}>
           <SettingsPanel />
@@ -44,7 +53,7 @@ export const getServerSideProps = async ({ req, query }: any) => {
   // Fetch data from external API
   const host = absoluteUrl(req, req.headers.host);
   try {
-    const res = await fetch(`${host.origin}/api/users?page=${page}`);
+    const res = await fetch(`${host.origin}/api/asteroids?page=${page}`);
     // const res = await fetch(`${process.env.FETCH_URL}/api/users?page=${page}`)
     if (res.status !== 200) {
       throw new Error("Failed to fetch");

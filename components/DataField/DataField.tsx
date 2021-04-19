@@ -5,7 +5,7 @@ const b = block("data-field");
 
 export type DataFieldItem = {
   caption?: string;
-  value?: string;
+  value?: string | number;
 };
 
 const DataField = ({ caption = "caption", value = "value" }: DataFieldItem) => (

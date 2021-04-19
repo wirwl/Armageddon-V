@@ -27,8 +27,8 @@ body,
 .layout {
   display: flex;
   flex-direction: column;
-}
 
-.layout__wrapper {
-  flex: 1 0 auto;
+  &__wrapper {
+    flex: 1;
+  }
 }
