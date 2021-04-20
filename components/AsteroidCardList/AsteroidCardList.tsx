@@ -15,22 +15,24 @@ type Props = {
 };
 
 const AsteroidCardList = ({ userData }: Props) => {
-  // const [users, setUsers] = useState([]);
-  const [asteroids, setAsteroids] = useState([]);
+  const isShowOnlyHazardous = useSelector(
+    (state: IRootState) => state.isShowOnlyHazardous
+  );
+
+  const [asteroids, setAsteroids] = useState<AsteroidData[]>([]);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const startLoading = () => setLoading(true);
   const stopLoading = () => setLoading(false);
 
-  const isShowOnlyHazardous = useSelector(
-    (state: IRootState) => state.isShowOnlyHazardous
-  );
   console.log("value from index.tsx");
   console.log(isShowOnlyHazardous);
 
   // if (isShowOnlyHazardous)
-  //   userData.asteroids = userData.asteroids.filter(
-  //     (value) => value.isPotentiallyHazardous === true
+  //   setAsteroids(
+  //     asteroids.filter(
+  //       (value: AsteroidData) => value.isPotentiallyHazardous === true
+  //     )
   //   );
 
   // console.log(userData.asteroids);
@@ -42,7 +44,13 @@ const AsteroidCardList = ({ userData }: Props) => {
       if (userData.error) {
         // Handle error
       } else {
-        setAsteroids(userData.asteroids as any);
+        setAsteroids(
+          isShowOnlyHazardous
+            ? userData.asteroids.filter(
+                (value: AsteroidData) => value.isPotentiallyHazardous === true
+              )
+            : userData.asteroids
+        );
       }
     }
   }, [userData]);
@@ -79,8 +87,8 @@ const AsteroidCardList = ({ userData }: Props) => {
       if (pageOffset > lastUserLoadedOffset) {
         // Stops loading
         /* IMPORTANT: Add !loading  */
-        if (userData.curPage < userData.maxPage && !loading) {
-          // Trigger fetch
+        if (!loading) {
+          console.log("Trigger fetch");
           const query: ParsedUrlQuery = router.query;
           query.page = (userData.curPage + 1).toString();
           query.hazardous = isShowOnlyHazardous ? "1" : "0";

@@ -9,6 +9,7 @@ import absoluteUrl from "next-absolute-url";
 import { AsteroidData, ServerData } from "../interfaces/asteroid";
 import { GetServerSideProps } from "next";
 import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { IRootState } from "../store";
 // import { NextApiRequest, NextApiResponse } from "next";
 
@@ -34,6 +35,47 @@ const IndexPage = ({ userData }: Props) => {
   //   if (data1 < data2) return -1;
   //   return 0;
   // });
+
+  // function addDays(date: Date, days: number): Date {
+  //   const copy = new Date(Number(date));
+  //   copy.setDate(date.getDate() + days);
+  //   return copy;
+  // }
+
+  // function prettifyDate(date: number): string {
+  //   const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+  //   const result = new Intl.DateTimeFormat("ru-RU", options as any)
+  //     .format(new Date(date))
+  //     .split(".")
+  //     .reverse()
+  //     .join("-");
+  //   return result;
+  // }
+
+  // const nasaURL = `https://api.nasa.gov/neo/rest/v1/feed?start_date=2021-04-15&end_date=2021-04-22&api_key=X64maaOGLjj7OiejYOWiKKjRHyC59He9NsJBukvR`;
+
+  // const daysPerRequest = 1;
+  // const currentDate = Date.now();
+  // const startDate = prettifyDate(currentDate);
+  // const endDate = prettifyDate(
+  //   currentDate + daysPerRequest * 1000 * 60 * 60 * 24
+  // );
+
+  // const actualNasaURL = `https://api.nasa.gov/neo/rest/v1/feed?start_date=${startDate}&end_date=${endDate}&api_key=X64maaOGLjj7OiejYOWiKKjRHyC59He9NsJBukvR`;
+
+  // console.log(startDate.toString());
+  // console.log(endDate.toString());
+  // console.log(actualNasaURL);
+
+  const isShowOnlyHazardous = useSelector(
+    (state: IRootState) => state.isShowOnlyHazardous
+  );
+
+  let newData: AsteroidData[] = [...userData.asteroids];
+  if (isShowOnlyHazardous)
+    newData = userData.asteroids.filter(
+      (value: AsteroidData) => value.isPotentiallyHazardous === true
+    );
 
   return (
     <Layout title="Armageddon V">

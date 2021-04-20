@@ -3,8 +3,34 @@ import { AsteroidData } from "../../interfaces/asteroid";
 
 let asteroidsData: AsteroidData[] = [];
 let nasaData: Response;
-let nasaJsonData: any = null;
+let jsonNASAData: any = null;
 let maxPage: number;
+let totalUsers = 0;
+let refinedAsteroids: AsteroidData[] = [];
+
+function prettifyDate(date: number): string {
+  const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+  const result = new Intl.DateTimeFormat("ru-RU", options as any)
+    .format(new Date(date))
+    .split(".")
+    .reverse()
+    .join("-");
+  return result;
+}
+
+// Кол-во метеоритов на одной странице
+const perPage = 10;
+
+// Кол-во дней указываемых в запросе API NASA. Минимальное значение равно 1, а максимальное 7.
+const daysPerRequest = 1;
+
+const currentDate = Date.now();
+const startDate = prettifyDate(currentDate);
+const endDate = prettifyDate(
+  currentDate + (daysPerRequest - 1) * 1000 * 60 * 60 * 24
+);
+
+let currentURL = `https://api.nasa.gov/neo/rest/v1/feed?start_date=${startDate}&end_date=${endDate}&api_key=X64maaOGLjj7OiejYOWiKKjRHyC59He9NsJBukvR`;
 
 const getLimitedAsteroids = (limit: number) => {
   const refinedAsteroids: AsteroidData[] = [];
@@ -55,23 +81,19 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const perPage = 10;
   const curPage: number = parseInt(req.query.page as string) || 1;
-  let totalUsers;
 
-  if (!nasaJsonData) {
-    nasaData = await fetch(
-      `https://api.nasa.gov/neo/rest/v1/feed?start_date=2021-04-15&end_date=2021-04-22&api_key=X64maaOGLjj7OiejYOWiKKjRHyC59He9NsJBukvR`
-    );
-    nasaJsonData = await nasaData.json();
-    asteroidsData = getAsteroidData(nasaJsonData);
-    totalUsers = nasaJsonData.element_count;
+  if (!jsonNASAData) {
+    nasaData = await fetch(currentURL);
+    jsonNASAData = await nasaData.json();
+    asteroidsData = getAsteroidData(jsonNASAData);
+    totalUsers = totalUsers + jsonNASAData.element_count;
     maxPage = Math.ceil(totalUsers / perPage);
   }
 
   let limit = perPage * curPage;
 
-  const refinedAsteroids = getLimitedAsteroids(limit);
+  refinedAsteroids.push(...getLimitedAsteroids(limit));
   try {
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
@@ -81,9 +103,16 @@ export default async function handler(
         asteroids: refinedAsteroids,
         curPage: curPage,
         maxPage: maxPage,
+        totalUsers: totalUsers,
+        currentURL,
       })
     );
   } catch (err) {
     console.log(err);
+  }
+
+  if (curPage >= maxPage) {
+    currentURL = jsonNASAData.links.next;
+    jsonNASAData = null;
   }
 }
