@@ -4,7 +4,6 @@ import { AsteroidData } from "../../interfaces/asteroid";
 let asteroidsData: AsteroidData[] = [];
 let nasaData: Response;
 let jsonNASAData: any = null;
-let maxPage: number;
 
 function prettifyDate(date: number): string {
   const options = { year: "numeric", month: "2-digit", day: "2-digit" };
