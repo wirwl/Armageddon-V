@@ -20,7 +20,14 @@
   }
 
   &__asteroids-page {
+    color: #000;
     margin-right: 25px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  &__destroy-page {
+    color: #000;
   }
 
   @media (max-width: 715px) {

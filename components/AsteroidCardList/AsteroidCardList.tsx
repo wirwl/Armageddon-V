@@ -73,7 +73,7 @@ const AsteroidCardList = ({ userData }: Props) => {
   });
 
   const handleScroll = () => {
-    // console.log("we in handleScroll function that replace in AsteroidCardList");
+    console.log("we in handleScroll function that replace in AsteroidCardList");
     // To get page offset of last user
     const lastUserLoaded = document.querySelector(
       `.${b()} > .${b("item")}:last-child`
@@ -86,7 +86,7 @@ const AsteroidCardList = ({ userData }: Props) => {
       if (pageOffset > lastUserLoadedOffset) {
         // Stops loading
         /* IMPORTANT: Add !loading  */
-        if (!loading) {
+        if (userData.curPage <= userData.maxPage && !loading) {
           console.log("Trigger fetch");
           const query = router.query;
           query.page = (userData.curPage + 1).toString();
