@@ -1,6 +1,5 @@
 import { block } from "bem-cn";
 import { useRouter } from "next/router";
-import { ParsedUrlQuery } from "node:querystring";
 import React from "react";
 import { useDispatch } from "react-redux";
 import Checkbox from "../Checkbox/Checkbox";
@@ -25,7 +24,7 @@ const SettingsPanel = () => {
   const handleCheckbox = (isChecked: boolean) => {
     dispatch({ type: "onChangeHazardous", isShowOnlyHazardous: isChecked });
 
-    const query: ParsedUrlQuery = router.query;
+    const query = router.query;
     query.hazardous = isChecked ? "1" : "0";
     router.push({ pathname: router.pathname, query: query }, undefined, {
       scroll: false,
