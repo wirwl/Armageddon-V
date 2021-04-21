@@ -10,6 +10,7 @@
   // padding-left: 21.73%;
   overflow: hidden;
   position: relative;
+  // cursor: pointer;
 
   &::before {
     content: "";
@@ -33,6 +34,10 @@
     // width: 71px;
     // height: 72px
     //transform: translateX(50px);
+    pointer-events: none;
+  }
+
+  &__wrapper-link {
   }
 
   &_hazardous {
@@ -44,7 +49,6 @@
     justify-content: space-between;
     margin-left: auto;
     flex-basis: 549px;
-    z-index: 10;
   }
 
   &__wrapper-data {
@@ -61,6 +65,8 @@
     text-decoration: underline;
     margin-bottom: 15px;
     color: #000;
+    z-index: 100;
+    position: relative;
   }
 
   &__wrapper-action {
@@ -88,7 +94,7 @@
       background: none;
     }
 
-    &__name {
+    &__wrapper-name {
       background: linear-gradient(90deg, #cff37d 0%, #7de88c 100%);
       min-height: 145px;
       display: flex;
@@ -112,7 +118,6 @@
     &__wrapper-asteroid {
       left: 27px;
       top: 22px;
-      z-index: 50;
     }
 
     &__wrapper {

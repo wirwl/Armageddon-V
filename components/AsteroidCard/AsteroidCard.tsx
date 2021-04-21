@@ -52,16 +52,18 @@ const AsteroidCard = ({ index, data }: Props) => {
 
   return (
     <div className={b({ hazardous: isPotentiallyHazardous })}>
-      <div className={b("wrapper-asteroid")}>
-        <ResizableAsteroid size={data.estimatedDiameterMax} />
-      </div>
       <div className={b("wrapper")}>
         <div className={b("wrapper-data")}>
-          <Link href={"/asteroids/2468910"}>
-            <a className={b("name")}>{`${index} ${normalizeAsteroidName(
-              name
-            )}`}</a>
-          </Link>
+          <div className={b("wrapper-name")}>
+            <div className={b("wrapper-asteroid")}>
+              <ResizableAsteroid size={data.estimatedDiameterMax} />
+            </div>
+            <Link href={"/asteroids/2468910"}>
+              <a className={b("name")}>{`${index} ${normalizeAsteroidName(
+                name
+              )}`}</a>
+            </Link>
+          </div>
           <DataFieldList
             items={[
               {

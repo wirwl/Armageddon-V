@@ -10,10 +10,10 @@ const b = block("asteroid-card-list");
 
 type Props = {
   userData: ServerData;
-  // asteroids: AsteroidData[];
+  curData: AsteroidData[];
 };
 
-const AsteroidCardList = ({ userData }: Props) => {
+const AsteroidCardList = ({ userData, curData }: Props) => {
   const isShowOnlyHazardous = useSelector(
     (state: IRootState) => state.isShowOnlyHazardous
   );
@@ -45,10 +45,10 @@ const AsteroidCardList = ({ userData }: Props) => {
       } else {
         setAsteroids(
           isShowOnlyHazardous
-            ? userData.asteroids.filter(
+            ? curData.filter(
                 (value: AsteroidData) => value.isPotentiallyHazardous === true
               )
-            : userData.asteroids
+            : curData
         );
       }
     }
@@ -86,12 +86,12 @@ const AsteroidCardList = ({ userData }: Props) => {
       if (pageOffset > lastUserLoadedOffset) {
         // Stops loading
         /* IMPORTANT: Add !loading  */
-        if (userData.curPage <= userData.maxPage && !loading) {
+        // userData.curPage <= userData.maxPage &&
+        if (!loading) {
           console.log("Trigger fetch");
           const query = router.query;
           query.page = (userData.curPage + 1).toString();
           query.hazardous = isShowOnlyHazardous ? "1" : "0";
-          // console.log(query.page);
           router.push(
             {
               pathname: router.pathname,

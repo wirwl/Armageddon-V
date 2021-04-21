@@ -1,17 +1,20 @@
 import { useMemo } from "react";
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { AsteroidData } from "./interfaces/asteroid";
 
 let store: any;
 
 export type IRootState = {
   isShowOnlyHazardous: boolean;
   isMoonTypeDistance: boolean;
+  asteroids: AsteroidData[];
 };
 
 const initialState: IRootState = {
   isShowOnlyHazardous: false,
   isMoonTypeDistance: false,
+  asteroids: [],
 };
 
 const reducer = (state = initialState, action: any) => {
@@ -25,6 +28,11 @@ const reducer = (state = initialState, action: any) => {
       return {
         ...state,
         isMoonTypeDistance: action.isMoonTypeDistance,
+      };
+    case "onAddAsteroids":
+      return {
+        ...state,
+        asteroids: action.asteroids,
       };
     default:
       return state;
