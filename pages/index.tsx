@@ -67,16 +67,6 @@ const IndexPage = ({ userData }: Props) => {
   // console.log(endDate.toString());
   // console.log(actualNasaURL);
 
-  const isShowOnlyHazardous = useSelector(
-    (state: IRootState) => state.isShowOnlyHazardous
-  );
-
-  let newData: AsteroidData[] = [...userData.asteroids];
-  if (isShowOnlyHazardous)
-    newData = userData.asteroids.filter(
-      (value: AsteroidData) => value.isPotentiallyHazardous === true
-    );
-
   return (
     <Layout title="Armageddon V">
       <ul className={s[b()]}>
