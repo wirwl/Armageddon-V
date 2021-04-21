@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Router, { useRouter } from "next/router";
 import { block } from "bem-cn";
 import AsteroidCard from "../AsteroidCard/AsteroidCard";
-import { ParsedUrlQuery } from "node:querystring";
 import { AsteroidData, ServerData } from "../../interfaces/asteroid";
 import { useSelector } from "react-redux";
 import { IRootState } from "../../store";
