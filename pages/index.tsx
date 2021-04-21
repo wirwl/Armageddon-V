@@ -3,39 +3,35 @@ import Layout from "../components/Layout/Layout";
 import React from "react";
 import AsteroidCardList from "../components/AsteroidCardList/AsteroidCardList";
 import { block } from "bem-cn";
-import s from "./index.module.scss";
 import fetch from "node-fetch";
 import absoluteUrl from "next-absolute-url";
 import { AsteroidData, ServerData } from "../interfaces/asteroid";
 import { GetServerSideProps } from "next";
 import { useDispatch, useSelector } from "react-redux";
-// import { useSelector } from "react-redux";
 import { IRootState } from "../store";
-import { useRouter } from "next/router";
-import useSwr from "swr";
-import AsteroidCard from "../components/AsteroidCard/AsteroidCard";
-// import { NextApiRequest, NextApiResponse } from "next";
+
+import s from "./index.module.scss";
 
 const b = block("index");
-// const fetcher = (url: any) => fetch(url).then((res) => res.json());
+
 let renderIndex = 0;
+
 type Props = {
-  userData: ServerData;
+  serverData: ServerData;
 };
 
-const IndexPage = ({ userData }: Props) => {
+const IndexPage = ({ serverData }: Props) => {
+  console.log(serverData);
   renderIndex += 1;
   console.log("renderIndex: " + renderIndex);
 
   const dispatch = useDispatch();
 
-  const asteroidsList: AsteroidData[] = [];
-
   const asteroidsFromStore: AsteroidData[] = useSelector(
     (state: IRootState) => state.asteroids
   );
 
-  asteroidsFromStore.push(...userData.asteroids);
+  if (serverData.asteroids) asteroidsFromStore.push(...serverData.asteroids);
 
   dispatch({ type: "onAddAsteroids", asteroids: asteroidsFromStore });
 
@@ -46,9 +42,9 @@ const IndexPage = ({ userData }: Props) => {
           <SettingsPanel />
         </li>
         <li className={s[b("asteroid-card-list")]}>
-          {userData ? (
+          {serverData ? (
             <AsteroidCardList
-              userData={userData}
+              serverData={serverData}
               curData={asteroidsFromStore}
             />
           ) : (
@@ -64,25 +60,23 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
   query,
 }) => {
-  // Fetch the first page as default
-  const page = query.page || 1;
-  let userData = null;
-  // Fetch data from external API
+  let serverData = null;
   const host = absoluteUrl(req, req.headers.host);
+  const page = query.page || 1;
   try {
     const res = await fetch(
-      `${host.origin}/api/asteroids2?page=${page}&hazardous=1`
+      // `${host.origin}/api/asteroids`
+      `${host.origin}/api/asteroids?page=${page}&hazardous=1`
     );
-    // const res = await fetch(`${process.env.FETCH_URL}/api/users?page=${page}`)
     if (res.status !== 200) {
       throw new Error("Failed to fetch");
     }
-    userData = await res.json();
+    serverData = await res.json();
   } catch (err) {
-    userData = { error: { message: err.message } };
+    serverData = { error: { message: err.message } };
   }
-  // Pass data to the page via props
-  return { props: { userData: userData } };
+
+  return { props: { serverData: serverData } };
 };
 
 export default IndexPage;

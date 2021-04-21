@@ -38,5 +38,5 @@ export type ServerData = {
   asteroids: AsteroidData[];
   curPage: number;
   maxPage: number;
-  error: string;
+  error: { message: string };
 };

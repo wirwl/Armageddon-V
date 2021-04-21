@@ -6,7 +6,7 @@ let nasaData: Response;
 let jsonNASAData: any = null;
 let maxPage: number;
 let totalUsers = 0;
-let refinedAsteroids: AsteroidData[] = [];
+// let refinedAsteroids: AsteroidData[] = [];
 
 function prettifyDate(date: number): string {
   const options = { year: "numeric", month: "2-digit", day: "2-digit" };
@@ -30,15 +30,16 @@ const endDate = prettifyDate(
   currentDate + (daysPerRequest - 1) * 1000 * 60 * 60 * 24
 );
 
-let currentURL = `https://api.nasa.gov/neo/rest/v1/feed?start_date=${startDate}&end_date=${endDate}&api_key=X64maaOGLjj7OiejYOWiKKjRHyC59He9NsJBukvR`;
+let startURL = `https://api.nasa.gov/neo/rest/v1/feed?start_date=${startDate}&end_date=${endDate}&api_key=X64maaOGLjj7OiejYOWiKKjRHyC59He9NsJBukvR`;
+let nextURL = startURL;
 
-const getLimitedAsteroids = (limit: number) => {
-  const refinedAsteroids: AsteroidData[] = [];
-  for (let i = 0; i < asteroidsData.length; i++) {
-    if (i < limit) refinedAsteroids.push(asteroidsData[i]);
-  }
-  return refinedAsteroids;
-};
+// const getLimitedAsteroids = (limit: number) => {
+//   const refinedAsteroids: AsteroidData[] = [];
+//   for (let i = 0; i < asteroidsData.length; i++) {
+//     if (i < limit) refinedAsteroids.push(asteroidsData[i]);
+//   }
+//   return refinedAsteroids;
+// };
 
 const getAsteroidData = (o: any) => {
   const asteroids: AsteroidData[] = [];
@@ -83,36 +84,37 @@ export default async function handler(
 ) {
   const curPage: number = parseInt(req.query.page as string) || 1;
 
-  if (!jsonNASAData) {
-    nasaData = await fetch(currentURL);
-    jsonNASAData = await nasaData.json();
-    asteroidsData = getAsteroidData(jsonNASAData);
-    totalUsers = totalUsers + jsonNASAData.element_count;
-    maxPage = Math.ceil(totalUsers / perPage);
-  }
+  // if (!jsonNASAData) {
+  nasaData = await fetch(nextURL);
+  // if (curPage > 1) startURL = "";
+  jsonNASAData = await nasaData.json();
+  asteroidsData = getAsteroidData(jsonNASAData);
+  totalUsers = jsonNASAData.element_count;
+  maxPage = Math.ceil(totalUsers / perPage);
+  // }
 
-  let limit = perPage * curPage;
+  // let limit = perPage * curPage;
 
-  refinedAsteroids.push(...getLimitedAsteroids(limit));
+  // refinedAsteroids.push(...getLimitedAsteroids(limit));
   try {
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
     res.end(
       JSON.stringify({
         message: "Fetched users",
-        asteroids: refinedAsteroids,
+        asteroids: asteroidsData,
         curPage: curPage,
         maxPage: maxPage,
         totalUsers: totalUsers,
-        currentURL,
+        currentURL: nextURL,
       })
     );
   } catch (err) {
     console.log(err);
   }
 
-  if (curPage >= maxPage) {
-    currentURL = jsonNASAData.links.next;
-    jsonNASAData = null;
-  }
+  // if (curPage > maxPage) {
+  nextURL = jsonNASAData.links.next;
+  jsonNASAData = null;
+  // }
 }
