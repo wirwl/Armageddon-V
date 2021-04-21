@@ -6,6 +6,8 @@ import { AsteroidData, ServerData } from "../../interfaces/asteroid";
 import { useSelector } from "react-redux";
 import { IRootState } from "../../store";
 
+import spinner from "./loading.svg";
+
 const b = block("asteroid-card-list");
 
 type Props = {
@@ -76,7 +78,7 @@ const AsteroidCardList = ({ userData, curData }: Props) => {
     console.log("we in handleScroll function that replace in AsteroidCardList");
     // To get page offset of last user
     const lastUserLoaded = document.querySelector(
-      `.${b()} > .${b("item")}:last-child`
+      `.${b("list")} > .${b("item")}:last-child`
     );
     // console.log(lastUserLoaded);
     if (lastUserLoaded) {
@@ -106,16 +108,19 @@ const AsteroidCardList = ({ userData, curData }: Props) => {
   };
 
   return (
-    <ul className={b()}>
-      {asteroids.length > 0 &&
-        asteroids.map((asteroid: AsteroidData, i) => {
-          return (
-            <li className={b("item")} key={i}>
-              <AsteroidCard index={i} data={asteroid} />
-            </li>
-          );
-        })}
-    </ul>
+    <div className={b()}>
+      <ul className={b("list")}>
+        {asteroids.length > 0 &&
+          asteroids.map((asteroid: AsteroidData, i) => {
+            return (
+              <li className={b("item")} key={i}>
+                <AsteroidCard index={i} data={asteroid} />
+              </li>
+            );
+          })}
+      </ul>
+      {loading && <img className={b("spinner")} src={spinner} />}
+    </div>
   );
 };
 

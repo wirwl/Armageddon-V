@@ -92,6 +92,10 @@
     background: #fff;
     padding: 0 0 20px 0;
 
+    &_hazardous &__wrapper-name {
+      background: linear-gradient(90deg, #ffb199 0%, #ff0844 100%);
+    }
+
     &::before {
       background: none;
     }

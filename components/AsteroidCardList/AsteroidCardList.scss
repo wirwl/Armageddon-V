@@ -1,9 +1,18 @@
 .asteroid-card-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   &__item {
     list-style: none;
   }
 
   &__item:not(:last-child) {
     margin-bottom: 15px;
+  }
+
+  &__spinner {
+    width: 160px;
+    margin: auto;
   }
 }
