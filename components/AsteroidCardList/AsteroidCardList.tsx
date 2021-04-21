@@ -60,12 +60,9 @@ const AsteroidCardList = ({ serverData, curData }: Props) => {
   });
 
   const handleScroll = () => {
-    console.log("we in handleScroll function that replace in AsteroidCardList");
-
     const lastMeteoriteLoaded = document.querySelector(
       `.${b("list")} > .${b("item")}:last-child`
     );
-    // console.log(lastUserLoaded);
     if (lastMeteoriteLoaded) {
       const lastUserLoadedOffset =
         (lastMeteoriteLoaded as HTMLElement).offsetTop +
@@ -97,7 +94,7 @@ const AsteroidCardList = ({ serverData, curData }: Props) => {
           asteroids.map((asteroid: AsteroidData, i) => {
             return (
               <li className={b("item")} key={i}>
-                <AsteroidCard index={i} data={asteroid} />
+                <AsteroidCard data={asteroid} />
               </li>
             );
           })}

@@ -6,11 +6,12 @@ const b = block("button");
 
 type Props = {
   text?: string;
+  link?: string;
 };
 
-const Button = ({ text = "button" }: Props) => (
+const Button = ({ text = "button", link = "/" }: Props) => (
   <div className={b()}>
-    <Link href="/">
+    <Link href={link}>
       <a className={b("text")}>{text}</a>
     </Link>
   </div>

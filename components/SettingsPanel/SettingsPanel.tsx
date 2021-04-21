@@ -17,9 +17,6 @@ type SettingsPanel = {
 const SettingsPanel = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  // const handler = useCallback(() => {
-  //   dispatch(action());
-  // }, []);
 
   const handleCheckbox = (isChecked: boolean) => {
     dispatch({ type: "onChangeHazardous", isShowOnlyHazardous: isChecked });
@@ -41,16 +38,20 @@ const SettingsPanel = () => {
     });
   };
 
+  const route = useRouter();
+
   return (
     <div className={b()}>
       <div className={b("checkbox")}>
         <Checkbox
+          isChecked={!!parseInt(route.query.hazardous as string)}
           handleOnChange={handleCheckbox}
           text={"Показать только опасные"}
         />
       </div>
       <div className={b("toggle-button")}>
         <ToggleButton
+          isMoon={!!parseInt(route.query.luna as string)}
           handleOnChange={handdleToggleButton}
           value1="в километрах"
           value2="в дистанциях до луны"

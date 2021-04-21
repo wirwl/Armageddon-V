@@ -1,5 +1,5 @@
 import { block } from "bem-cn";
-import asteroidUrl from "./asteroid2.svg";
+import asteroidUrl from "./asteroid.svg";
 
 const b = block("resizable-asteroid");
 

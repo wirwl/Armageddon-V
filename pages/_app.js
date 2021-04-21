@@ -12,7 +12,6 @@ import "../components/DataField/DataField.scss";
 import "../components/DataFieldList/DataFieldList.scss";
 import "../components/AsteroidCardList/AsteroidCardList.scss";
 import "../components/AsteroidCard/AsteroidCard.scss";
-import "../components/ResizableAsteroid/ResizableAsteroid.scss";
 import "../components/ToggleDistanceType/ToggleDistanceType.scss";
 
 // import App from 'next/app'

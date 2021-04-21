@@ -14,17 +14,11 @@ import s from "./index.module.scss";
 
 const b = block("index");
 
-let renderIndex = 0;
-
 type Props = {
   serverData: ServerData;
 };
 
 const IndexPage = ({ serverData }: Props) => {
-  console.log(serverData);
-  renderIndex += 1;
-  console.log("renderIndex: " + renderIndex);
-
   const dispatch = useDispatch();
 
   const asteroidsFromStore: AsteroidData[] = useSelector(

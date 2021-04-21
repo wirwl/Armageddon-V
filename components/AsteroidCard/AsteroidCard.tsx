@@ -11,8 +11,6 @@ import { IRootState } from "../../store";
 const b = block("asteroid-card");
 
 type Props = {
-  // name: string;
-  index: number;
   data: AsteroidData;
 };
 
@@ -23,15 +21,15 @@ const normalizeAsteroidName = (name: string): string => {
   else return name;
 };
 
-const AsteroidCard = ({ index, data }: Props) => {
+const AsteroidCard = ({ data }: Props) => {
   const {
+    id,
     name,
     estimatedDiameterMax,
     isPotentiallyHazardous,
     closeApproachData,
     missDistanceKilometers,
     missDistanceLunar,
-    // closeApproachDataList,
   } = data;
 
   const prettifyDate = (date: string): string => {
@@ -58,10 +56,8 @@ const AsteroidCard = ({ index, data }: Props) => {
             <div className={b("wrapper-asteroid")}>
               <ResizableAsteroid size={data.estimatedDiameterMax} />
             </div>
-            <Link href={"/asteroids/2468910"}>
-              <a className={b("name")}>{`${index} ${normalizeAsteroidName(
-                name
-              )}`}</a>
+            <Link href={`/asteroids/${id}`}>
+              <a className={b("name")}>{`${normalizeAsteroidName(name)}`}</a>
             </Link>
           </div>
           <DataFieldList
@@ -86,7 +82,7 @@ const AsteroidCard = ({ index, data }: Props) => {
           <p className={b("hazard")}>
             {isPotentiallyHazardous ? "опасен" : "не опасен"}
           </p>
-          <Button text="На уничтожение" />
+          <Button text="На уничтожение" link="/destroy" />
         </div>
       </div>
     </div>

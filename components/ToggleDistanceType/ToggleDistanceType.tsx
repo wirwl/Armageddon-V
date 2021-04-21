@@ -7,10 +7,16 @@ type Props = {
   value1: string;
   value2: string;
   handleOnChange?: (isValue2: boolean) => void;
+  isMoon?: boolean;
 };
 
-const ToggleDistanceType = ({ value1, value2, handleOnChange }: Props) => {
-  const [selectedValue, setSelectedValue] = useState(value1);
+const ToggleDistanceType = ({
+  value1,
+  value2,
+  handleOnChange,
+  isMoon = false,
+}: Props) => {
+  const [selectedValue, setSelectedValue] = useState(isMoon ? value2 : value1);
 
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedValue(e.currentTarget.value);

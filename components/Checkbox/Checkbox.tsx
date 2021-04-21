@@ -6,13 +6,17 @@ const b = block("checkbox");
 type Props = {
   handleOnChange?: (isChecked: boolean) => void;
   text?: string;
+  isChecked?: boolean;
 };
 
-const Checkbox = ({ handleOnChange, text = "text" }: Props) => {
-  const [checked, setChecked] = useState(false);
+const Checkbox = ({
+  handleOnChange,
+  text = "text",
+  isChecked = false,
+}: Props) => {
+  const [checked, setChecked] = useState(isChecked);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("...on change...");
     setChecked(e.target.checked);
     handleOnChange && handleOnChange(e.target.checked);
   };
