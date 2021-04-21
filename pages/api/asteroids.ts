@@ -85,7 +85,7 @@ export default async function handler(
   const curPage: number = parseInt(req.query.page as string) || 1;
 
   // if (!jsonNASAData) {
-  nasaData = await fetch(nextURL);
+  nasaData = await fetch(curPage > 1 ? nextURL : startURL);
   // if (curPage > 1) startURL = "";
   jsonNASAData = await nasaData.json();
   asteroidsData = getAsteroidData(jsonNASAData);
