@@ -6,15 +6,15 @@ const b = block("toggle-distance-type");
 type Props = {
   value1: string;
   value2: string;
+  handleOnChange?: (isValue2: boolean) => void;
 };
 
-const ToggleDistanceType = ({ value1, value2 }: Props) => {
+const ToggleDistanceType = ({ value1, value2, handleOnChange }: Props) => {
   const [selectedValue, setSelectedValue] = useState(value1);
 
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedValue(e.currentTarget.value);
-    console.log("====");
-    console.log(e.currentTarget.value);
+    handleOnChange && handleOnChange(selectedValue === value1 ? true : false);
   };
 
   return (

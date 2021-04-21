@@ -1,8 +1,7 @@
 import { block } from "bem-cn";
-import { route } from "next/dist/next-server/server/router";
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "node:querystring";
-import React, { useCallback } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import Checkbox from "../Checkbox/Checkbox";
 import ToggleButton from "../ToggleDistanceType/ToggleDistanceType";
@@ -24,11 +23,20 @@ const SettingsPanel = () => {
   // }, []);
 
   const handleCheckbox = (isChecked: boolean) => {
-    console.log(isChecked);
     dispatch({ type: "onChangeHazardous", isShowOnlyHazardous: isChecked });
 
     const query: ParsedUrlQuery = router.query;
     query.hazardous = isChecked ? "1" : "0";
+    router.push({ pathname: router.pathname, query: query }, undefined, {
+      scroll: false,
+    });
+  };
+
+  const handdleToggleButton = (isMoon: boolean) => {
+    dispatch({ type: "onChangeTypeDistance", isMoonTypeDistance: isMoon });
+
+    const query = router.query;
+    query.luna = isMoon ? "1" : "0";
     router.push({ pathname: router.pathname, query: query }, undefined, {
       scroll: false,
     });
@@ -43,7 +51,11 @@ const SettingsPanel = () => {
         />
       </div>
       <div className={b("toggle-button")}>
-        <ToggleButton value1="в километрах" value2="в дистанциях до луны" />
+        <ToggleButton
+          handleOnChange={handdleToggleButton}
+          value1="в километрах"
+          value2="в дистанциях до луны"
+        />
       </div>
     </div>
   );

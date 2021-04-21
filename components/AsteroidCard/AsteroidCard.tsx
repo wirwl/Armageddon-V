@@ -5,6 +5,8 @@ import DataFieldList from "../DataFieldList/DataFieldList";
 import ResizableAsteroid from "../ResizableAsteroid/ResizableAsteroid";
 import Link from "next/link";
 import { AsteroidData } from "../../interfaces/asteroid";
+import { useSelector } from "react-redux";
+import { IRootState } from "../../store";
 
 const b = block("asteroid-card");
 
@@ -28,7 +30,7 @@ const AsteroidCard = ({ index, data }: Props) => {
     isPotentiallyHazardous,
     closeApproachData,
     missDistanceKilometers,
-    // missDistanceLunar,
+    missDistanceLunar,
     // closeApproachDataList,
   } = data;
 
@@ -39,6 +41,14 @@ const AsteroidCard = ({ index, data }: Props) => {
       .toString();
     return prettifiedDate.substr(0, prettifiedDate.length - 3);
   };
+
+  const isMoonTypeDistance = useSelector(
+    (state: IRootState) => state.isMoonTypeDistance
+  );
+
+  const distance = `${new Intl.NumberFormat("ru-RU").format(
+    Math.round(isMoonTypeDistance ? missDistanceLunar : missDistanceKilometers)
+  )} ${isMoonTypeDistance ? "" : "км"}`;
 
   return (
     <div className={b({ hazardous: isPotentiallyHazardous })}>
@@ -60,9 +70,7 @@ const AsteroidCard = ({ index, data }: Props) => {
               },
               {
                 caption: "Расстояние",
-                value: `${new Intl.NumberFormat("ru-RU").format(
-                  Math.round(missDistanceKilometers)
-                )} км`,
+                value: distance,
               },
               {
                 caption: "Размер",

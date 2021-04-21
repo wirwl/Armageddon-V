@@ -6,22 +6,16 @@ let store: any;
 
 export type IRootState = {
   isShowOnlyHazardous: boolean;
-  isLuneTypeDistance: boolean;
+  isMoonTypeDistance: boolean;
 };
 
 const initialState: IRootState = {
   isShowOnlyHazardous: false,
-  isLuneTypeDistance: false,
+  isMoonTypeDistance: false,
 };
 
 const reducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case "TICK":
-      return {
-        ...state,
-        lastUpdate: action.lastUpdate,
-        light: !!action.light,
-      };
     case "onChangeHazardous":
       return {
         ...state,
@@ -30,7 +24,7 @@ const reducer = (state = initialState, action: any) => {
     case "onChangeTypeDistance":
       return {
         ...state,
-        isLuneTypeDistance: action.isLuneTypeDistance,
+        isMoonTypeDistance: action.isMoonTypeDistance,
       };
     default:
       return state;

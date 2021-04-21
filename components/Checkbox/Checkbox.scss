@@ -1,3 +1,52 @@
+@import "../../variables.scss";
+
 .checkbox {
   user-select: none;
+  position: relative;
+
+  &__input {
+    @include visually-hidden;
+  }
+
+  &__text {
+    margin-left: 28px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__text::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(0, 0, 0, 0.87);
+    border-radius: 3px;
+  }
+
+  &__text::after {
+    content: "";
+    position: absolute;
+    transition: all 0.2s ease;
+    left: 3px;
+    top: 4px;
+    width: 12px;
+    height: 7px;
+    border-left: 2px solid white;
+    border-bottom: 2px solid white;
+    transform: rotate(-45deg);
+  }
+
+  &__input:checked + &__text::before {
+    background: rgba(0, 0, 0, 0.87);
+  }
+
+  &__input:not(:checked) + &__text::after {
+    opacity: 0;
+  }
+
+  &__input:checked + &__text::after {
+    opacity: 1;
+  }
 }

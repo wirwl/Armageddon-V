@@ -20,12 +20,13 @@ const Checkbox = ({ handleOnChange, text = "text" }: Props) => {
   return (
     <label className={b()}>
       <input
+        className={b("input")}
         type="checkbox"
         key={Math.random()}
         checked={checked}
         onChange={onChange}
-      />{" "}
-      {text}
+      />
+      <span className={b("text")}>{text}</span>
     </label>
   );
 };

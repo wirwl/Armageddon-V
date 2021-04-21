@@ -89,7 +89,7 @@ const AsteroidCardList = ({ userData }: Props) => {
         /* IMPORTANT: Add !loading  */
         if (!loading) {
           console.log("Trigger fetch");
-          const query: ParsedUrlQuery = router.query;
+          const query = router.query;
           query.page = (userData.curPage + 1).toString();
           query.hazardous = isShowOnlyHazardous ? "1" : "0";
           // console.log(query.page);
